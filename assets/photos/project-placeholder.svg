@@ -1,0 +1,10 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="900" fill="#F7F1E8"/>
+  <rect x="110" y="120" width="980" height="660" rx="38" fill="#FFF9F2" stroke="#C89C49" stroke-width="6"/>
+  <rect x="170" y="190" width="320" height="210" rx="20" fill="#EBD8C1"/>
+  <rect x="530" y="190" width="500" height="34" rx="17" fill="#9D4127"/>
+  <rect x="530" y="260" width="410" height="24" rx="12" fill="#C89C49"/>
+  <rect x="530" y="308" width="460" height="24" rx="12" fill="#D8C3A8"/>
+  <rect x="170" y="450" width="860" height="190" rx="24" fill="#F2E7D9"/>
+  <text x="600" y="725" text-anchor="middle" fill="#682717" font-family="Arial, sans-serif" font-size="44">Project Photo Placeholder</text>
+</svg>

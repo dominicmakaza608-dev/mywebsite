@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal CV Website</title>
+  <meta name="description" content="A personal website for sharing a profile, achievements, daily updates, photos, and documents.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <nav class="topbar">
+        <div class="brand">
+          <span class="brand-mark">CV</span>
+          <span id="brandName">Your Name</span>
+        </div>
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#timeline">Timeline</a>
+          <a href="#photos">Photos</a>
+          <a href="#documents">Documents</a>
+          <a href="#updates">Updates</a>
+        </div>
+      </nav>
+
+      <section class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Personal Website</p>
+          <h1 id="heroName">Your Name</h1>
+          <p class="hero-role" id="heroRole">Your role or headline</p>
+          <p class="hero-summary" id="heroSummary"></p>
+
+          <div class="hero-actions">
+            <a class="button button-primary" id="primaryDocumentLink" href="#documents">Open CV</a>
+            <a class="button button-secondary" href="#updates">Latest Updates</a>
+          </div>
+
+          <div class="social-strip" id="socialLinks"></div>
+
+          <div class="quick-facts" id="quickFacts"></div>
+        </div>
+
+        <aside class="hero-card">
+          <div class="portrait-frame">
+            <img id="profileImage" alt="Profile portrait">
+          </div>
+          <div class="contact-list" id="contactList"></div>
+        </aside>
+      </section>
+    </header>
+
+    <main>
+      <section class="section section-about" id="about">
+        <div class="section-heading">
+          <p class="section-kicker">About</p>
+          <h2>Who I am</h2>
+        </div>
+        <div class="about-layout">
+          <article class="panel panel-large">
+            <p id="aboutText"></p>
+          </article>
+          <div class="stats-grid" id="statsGrid"></div>
+        </div>
+      </section>
+
+      <section class="section" id="timeline">
+        <div class="section-heading">
+          <p class="section-kicker">Journey</p>
+          <h2>Timeline</h2>
+        </div>
+        <div class="timeline-list" id="timelineList"></div>
+      </section>
+
+      <section class="section" id="photos">
+        <div class="section-heading">
+          <p class="section-kicker">Gallery</p>
+          <h2>Photos</h2>
+        </div>
+        <div class="gallery-grid" id="photoGallery"></div>
+      </section>
+
+      <section class="section" id="documents">
+        <div class="section-heading">
+          <p class="section-kicker">Archive</p>
+          <h2>Documents</h2>
+        </div>
+        <div class="document-grid" id="documentGrid"></div>
+      </section>
+
+      <section class="section" id="updates">
+        <div class="section-heading">
+          <p class="section-kicker">Daily Journal</p>
+          <h2>Journal Feed</h2>
+        </div>
+        <div class="journal-layout">
+          <aside class="journal-sidebar panel">
+            <p class="section-kicker">Posting Rhythm</p>
+            <h3 class="journal-title">One place for each day</h3>
+            <p class="journal-copy" id="journalIntro"></p>
+            <div class="journal-prompt-list" id="journalPromptList"></div>
+            <div class="journal-sidebar-group">
+              <p class="journal-filter-label">Browse By Tag</p>
+              <div class="filter-chip-list" id="journalTags"></div>
+            </div>
+            <div class="journal-sidebar-group">
+              <p class="journal-filter-label">Browse By Month</p>
+              <div class="filter-chip-list" id="journalArchives"></div>
+            </div>
+          </aside>
+          <div class="journal-main">
+            <article class="featured-post" id="featuredPost"></article>
+            <div class="journal-results-meta" id="journalResultsMeta"></div>
+            <div class="updates-list" id="updatesList"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="content.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

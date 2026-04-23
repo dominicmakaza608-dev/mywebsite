@@ -1,0 +1,8 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="900" fill="#F4E9DA"/>
+  <rect x="120" y="130" width="960" height="640" rx="32" fill="#FFF9F2"/>
+  <circle cx="600" cy="340" r="120" fill="#C89C49"/>
+  <path d="M600 240L623.511 312.361H699.595L638.042 357.078L661.553 429.439L600 384.722L538.447 429.439L561.958 357.078L500.405 312.361H576.489L600 240Z" fill="#FFF9F2"/>
+  <text x="600" y="590" text-anchor="middle" fill="#9D4127" font-family="Arial, sans-serif" font-size="54">Achievement Photo</text>
+  <text x="600" y="650" text-anchor="middle" fill="#7C6756" font-family="Arial, sans-serif" font-size="30">Replace with your own image</text>
+</svg>

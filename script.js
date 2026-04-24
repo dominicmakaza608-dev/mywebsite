@@ -462,13 +462,14 @@ function initSite() {
   const primaryDocument = documents[0];
   const primaryDocumentLink = document.getElementById("primaryDocumentLink");
   if (primaryDocumentLink && primaryDocument) {
-    primaryDocumentLink.href = primaryDocument.file;
+    // Force the link to scroll down to the Documents section instead of bypassing the lock
+    primaryDocumentLink.href = "#documents";
   }
 
   renderCollection("quickFacts", profile.facts, createFactCard);
   renderCollection("statsGrid", profile.stats, createStatCard);
   renderCollection("socialLinks", profile.socials || [], createSocialLink);
-  renderCollection("contactList", profile.contacts, createContactCard);
+  renderCollection("contactList", profile.contacts || [], createContactCard);
   renderCollection("timelineList", timeline, createTimelineItem);
   renderCollection("photoGallery", photos, createPhotoCard);
   renderCollection("documentGrid", documents, createDocumentCard);

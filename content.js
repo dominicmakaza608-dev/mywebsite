@@ -49,10 +49,10 @@ window.siteContent = {
   ],
   documents: [
     {
-      type: "CV",
-      title: "Resume PDF",
-      description: "Replace this sample document with your real CV or resume PDF.",
-      file: "assets/documents/sample-cv.txt"
+      type: "C Program",
+      title: "Linked List Implementation",
+      description: "A complete C program implementing a singly linked list with insertion, deletion, searching, and display capabilities.",
+      file: "assets/documents/linked_list.c"
     },
     {
       type: "Certificate",
@@ -71,6 +71,20 @@ window.siteContent = {
     featuredLabel: "Featured Entry"
   },
   updates: [
+    {
+      date: "2026-04-25",
+      featured: true,
+      tag: "C Programming",
+      tags: ["Data Structures", "Linked List", "C"],
+      mood: "Productive",
+      title: "Built a Singly Linked List in C",
+      lead: "Wrote a complete menu-driven C program to handle linked list operations from scratch.",
+      body: "The program supports inserting nodes at the beginning, end, or any random location. It handles deletions safely preventing underflows, and has a built-in search and display function using dynamic memory allocation.",
+      highlights: ["Dynamic Memory Allocation", "Menu-Driven Interface", "Full CRUD operations"],
+      attachments: [
+        { label: "View Source Code", href: "assets/documents/linked_list.c" }
+      ]
+    },
     {
       date: "2026-04-24",
       featured: true,

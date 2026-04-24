@@ -1,57 +1,38 @@
 window.siteContent = {
   profile: {
-    name: "DOMINIC MAKAZA",
+    name: "Jarvis SU",
     role: "Consultant, Learner, Builder",
-    summary: "This website works as a living CV. Use it to present your background, highlight new work, upload documents, and keep a daily record of progress.",
-    about: "Write a short introduction here. You can describe your background, values, career goals, and the kind of work you want people to know you for. Because this site is content-driven, you can keep refreshing it as your experience grows.",
+   
     image: "assets/photos/artemis-ii-liftoff.jpg",
     facts: [
-      { label: "Base", value: "Your City" },
-      { label: "Focus", value: "Your Expertise" },
+      { label: "Base", value: "harare" },
+      { label: "Focus", value: "learning to learn" },
       { label: "Open To", value: "Work, Study, Projects" }
     ],
     stats: [
-      { label: "Years of Experience", value: "03+" },
+      { label: "Years of Experience", value: "03" },
       { label: "Projects", value: "12" },
       { label: "Certificates", value: "05" }
     ],
     socials: [
-      {
-        label: "LinkedIn",
-        handle: "linkedin.com/in/dominic-makaza",
-        href: "https://www.linkedin.com/in/dominic-makaza/"
-      },
+      
       {
         label: "X",
-        handle: "@dominicmakaza",
-        href: "https://x.com/dominicmakaza"
+        handle: "@makaz425",
+        href: "https://x.com/@makaz425"
       }
     ],
-    contacts: [
-      { label: "Email", value: "you@example.com", href: "mailto:you@example.com" },
-      { label: "Phone", value: "+91 00000 00000", href: "tel:+910000000000" },
-      { label: "LinkedIn", value: "linkedin.com/in/dominic-makaza", href: "https://www.linkedin.com/in/dominic-makaza/" },
-      { label: "X", value: "x.com/dominicmakaza", href: "https://x.com/dominicmakaza" },
-      { label: "Location", value: "India" }
-    ]
   },
   timeline: [
     {
       period: "2026",
-      title: "Started this living CV website",
-      description: "Created a personal website that can be updated daily with photos, documents, and short activity notes."
     },
     {
       period: "2025",
-      title: "Add your most important recent milestone",
-      description: "Replace this with your job, degree, internship, certification, or major project."
+      title: "Undergrad",
+      description: "B.Tech Ag.Engg"
     },
     {
-      period: "Earlier",
-      title: "Add your earlier journey",
-      description: "Use the timeline to show how your work and learning have grown over time."
-    }
-  ],
   photos: [
     {
       title: "Artemis II Liftoff",
@@ -81,7 +62,7 @@ window.siteContent = {
     }
   ],
   journal: {
-    intro: "Use this feed like a daily logbook. Each entry can hold one short reflection, a few highlights, and links to the photos or documents you added that day.",
+    intro: "irrigation + human rights",
     prompts: [
       "What did I finish today?",
       "What did I learn or improve?",
@@ -158,7 +139,7 @@ window.siteContent = {
       body: "Planned to use the site as a running CV, a simple archive, and a personal progress feed. That means each entry can capture one useful thing from the day, even if it is small.",
       highlights: ["Defined the site purpose", "Made daily updates easier", "Prepared for long-term use"],
       attachments: [
-        { label: "Sample CV", href: "assets/documents/sample-cv.txt" }
+        { label: " href: "assets/documents/sample-cv.txt" }
       ]
     }
   ]

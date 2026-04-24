@@ -31,8 +31,8 @@ window.siteContent = {
       period: "2025",
       title: "Undergrad",
       description: "B.Tech Ag.Engg"
-    },
-    {
+    }
+  ],
   photos: [
     {
       title: "Artemis II Liftoff",

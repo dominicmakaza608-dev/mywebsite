@@ -73,7 +73,7 @@ window.siteContent = {
     },
     {
       date: "2026-04-24",
-      featured: true,
+      featured: false,
       tag: "OSINT",
       tags: ["Flightradar24", "OSINT", "Tutorial"],
       mood: "Informative",

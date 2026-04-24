@@ -91,6 +91,21 @@ window.siteContent = {
   },
   updates: [
     {
+      date: "2026-04-24",
+      featured: true,
+      tag: "OSINT",
+      tags: ["Flightradar24", "OSINT", "Tutorial"],
+      mood: "Informative",
+      title: "How to Access Flightradar24: Live Flight Tracking",
+      lead: "Flightradar24 is a free, open-source OSINT tool that provides real-time flight tracking across the globe using ADS-B data.",
+      body: "Learn how to access and use Flightradar24 to track live aircraft positions. The platform displays interactive maps with real-time aircraft data, allows filtering by flight/airline, and offers premium features for extended flight history and 3D visualization.",
+      image: "Screenshot/flightinfo-cropped.png",
+      highlights: ["Visit https://flightradar24.com", "Search flights, airports, or airlines", "No registration required for basic features", "Premium options available for advanced tracking"],
+      attachments: [
+        { label: "Flightradar24", href: "https://flightradar24.com" }
+      ]
+    },
+    {
       date: "2026-04-15",
       featured: true,
       tag: "Website Setup",

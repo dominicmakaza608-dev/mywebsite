@@ -865,3 +865,109 @@ h2 {
     grid-template-columns: 1fr;
   }
 }
+
+/* ========================================================= */
+/*                   NEW UI ELEMENTS & INTERACTIVITY         */
+/* ========================================================= */
+
+/* Auth UI */
+.auth-ui {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent);
+}
+
+/* Locked State */
+.locked-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 16px;
+  padding: 48px 24px;
+  background: var(--panel-strong);
+  border: 1px dashed var(--accent);
+}
+.locked-state h3 {
+  font-size: 1.5rem;
+  color: var(--accent-dark);
+}
+.locked-state p {
+  max-width: 400px;
+  color: var(--muted);
+}
+
+/* Contact Form */
+.contact-layout {
+  display: grid;
+  gap: 24px;
+}
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--accent-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.form-group input,
+.form-group textarea {
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.6);
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--text);
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(157, 65, 39, 0.1);
+}
+.form-status {
+  font-size: 0.9rem;
+  font-weight: 700;
+  min-height: 20px;
+}
+.form-status.success {
+  color: #2e7d32;
+}
+.form-status.error {
+  color: #c62828;
+}
+
+/* Scroll Reveal Animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}

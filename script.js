@@ -484,3 +484,81 @@ function initSite() {
 }
 
 initSite();
+
+/* ========================================================= */
+/*                   INTERACTIVITY & FORM HANDLING           */
+/* ========================================================= */
+
+// 1. Scroll Reveal Animations
+function reveal() {
+  const reveals = document.querySelectorAll(".reveal");
+  for (let i = 0; i < reveals.length; i++) {
+    const windowHeight = window.innerHeight;
+    const elementTop = reveals[i].getBoundingClientRect().top;
+    const elementVisible = 100;
+    
+    if (elementTop < windowHeight - elementVisible) {
+      reveals[i].classList.add("active");
+    }
+  }
+}
+window.addEventListener("scroll", reveal);
+reveal(); // Trigger on load
+
+// 2. Contact Form with Bot Screening (Turnstile)
+const contactForm = document.getElementById("contactForm");
+if (contactForm) {
+  contactForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const status = document.getElementById("formStatus");
+    
+    // Check if Cloudflare Turnstile token exists
+    const formData = new FormData(contactForm);
+    const turnstileResponse = formData.get("cf-turnstile-response");
+    
+    if (!turnstileResponse) {
+      status.textContent = "Please complete the security check.";
+      status.className = "form-status error";
+      return;
+    }
+
+    // Actual fetch() request to Formspree
+    status.textContent = "Sending message...";
+    status.className = "form-status";
+    
+    const FORMSPREE_URL = 'https://formspree.io/f/xkokyqlg';
+    
+    fetch(FORMSPREE_URL, {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Accept': 'application/json'
+      }
+    })
+    .then(response => {
+      if (response.ok) {
+        status.textContent = "Message sent successfully! I'll get back to you soon.";
+        status.className = "form-status success";
+        contactForm.reset();
+        
+        // Reset Turnstile widget
+        if (typeof turnstile !== "undefined") {
+          turnstile.reset();
+        }
+      } else {
+        response.json().then(data => {
+          if (Object.hasOwn(data, 'errors')) {
+            status.textContent = data["errors"].map(error => error["message"]).join(", ");
+          } else {
+            status.textContent = "Oops! There was a problem submitting your form.";
+          }
+          status.className = "form-status error";
+        });
+      }
+    })
+    .catch(error => {
+      status.textContent = "Oops! There was a problem submitting your form.";
+      status.className = "form-status error";
+    });
+  });
+}

@@ -221,29 +221,139 @@
             margin-bottom: 8px;
         }
 
-        .research-container p, .research-container li {
+        /* Only direct-child text (not text inside paper cards) uses this default */
+        .research-container > p,
+        .research-container > li {
             color: #cbd5e1;
             font-size: 13px;
             margin-bottom: 8px;
         }
 
-        .research-container a {
+        .research-container .paper-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin: 12px 0 22px;
+        }
+
+        .research-container .paper-card {
+            position: relative;
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 3px solid rgba(56, 189, 248, 0.35);
+            border-radius: 8px;
+            padding: 16px 20px;
+            transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+        }
+
+        .research-container .paper-card:hover,
+        .research-container .paper-card:focus-within {
+            border-left-color: #38bdf8;
+            border-color: rgba(56, 189, 248, 0.3);
+            box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.08), 0 4px 20px rgba(56, 189, 248, 0.1);
+            transform: translateX(2px);
+        }
+
+        .research-container .paper-title {
+            margin: 0 0 6px;
+            font-size: 15px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .research-container .paper-title a {
+            color: #f8fafc;
+            text-decoration: none;
+            background-image: linear-gradient(#38bdf8, #38bdf8);
+            background-size: 0% 1px;
+            background-repeat: no-repeat;
+            background-position: 0 100%;
+            transition: background-size 180ms ease, color 180ms ease;
+        }
+
+        .research-container .paper-title a:hover,
+        .research-container .paper-title a:focus-visible {
+            color: #7dd3fc;
+            background-size: 100% 1px;
+        }
+
+        .research-container .paper-title a:focus-visible {
+            outline: 2px solid #38bdf8;
+            outline-offset: 3px;
+            border-radius: 2px;
+        }
+
+        .research-container .paper-meta {
+            margin: 0 0 10px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            color: #64748b;
+        }
+
+        .research-container .paper-abstract {
+            margin: 0;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #cbd5e1;
+        }
+
+        .research-container .paper-empty,
+        .research-container .paper-error {
+            font-size: 13px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(15, 23, 42, 0.7);
+            margin: 12px 0 22px;
+        }
+
+        .research-container .paper-empty {
+            color: #64748b;
+        }
+
+        .research-container .paper-error {
+            color: #f87171;
+            border-color: rgba(248, 113, 113, 0.3);
+        }
+
+        .research-container .research-links-heading {
+            margin-top: 24px;
+        }
+
+        .research-container .research-links {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .research-container .research-links a {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
             color: #38bdf8;
+            text-decoration: none;
+            width: fit-content;
+        }
+
+        .research-container .research-links a:hover,
+        .research-container .research-links a:focus-visible {
+            color: #4ade80;
             text-decoration: underline;
         }
 
-        .research-container a:hover {
-            color: #4ade80;
+        .research-container .research-links a:focus-visible {
+            outline: 2px solid #38bdf8;
+            outline-offset: 3px;
+            border-radius: 2px;
         }
 
-        .schematic-preview {
-            width: 100%;
-            max-height: 280px;
-            object-fit: cover;
-            border-radius: 8px;
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            margin-top: 10px;
-            margin-bottom: 15px;
+        @media (prefers-reduced-motion: reduce) {
+            .research-container .paper-card,
+            .research-container .paper-title a {
+                transition: none;
+            }
         }
         
         .stats-grid {

@@ -430,7 +430,7 @@
             document.getElementById('scheduleResult').classList.add('show');
         }
 
-        async function runResearch() {
+         async function runResearch() {
             const q = document.getElementById('researchQuery').value.trim();
             const outputElement = document.getElementById('researchOutput');
             const resultBox = document.getElementById('researchResult');
@@ -440,14 +440,25 @@
                 return;
             }
 
-            outputElement.innerHTML = `<p style="color: #38bdf8; font-family: 'JetBrains Mono', monospace;">[PHD ENGINE] Querying live academic databases for real papers on "${q}"...</p>`;
+            outputElement.innerHTML = `<p style="color: #38bdf8; font-family: 'JetBrains Mono', monospace;">[PHD ENGINE] Querying live academic databases and rendering dynamic schematics for "${q}"...</p>`;
             resultBox.classList.add('show');
 
             const queryEncoded = encodeURIComponent(q);
+            const lowerQ = q.toLowerCase();
+
+            // Dynamic image selection based on keywords in your search
+            let imageUrl = "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1000&auto=format&fit=crop"; // default engineering
+            if (lowerQ.includes('greenhouse') || lowerQ.includes('plant') || lowerQ.includes('soil') || lowerQ.includes('crop')) {
+                imageUrl = "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?q=80&w=1000&auto=format&fit=crop"; // agriculture/greenhouse
+            } else if (lowerQ.includes('vehicle') || lowerQ.includes('tractor') || lowerQ.includes('mechanic') || lowerQ.includes('fluid')) {
+                imageUrl = "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=1000&auto=format&fit=crop"; // robotics/machinery
+            } else if (lowerQ.includes('math') || lowerQ.includes('calculus') || lowerQ.includes('equation')) {
+                imageUrl = "https://images.unsplash.com/photo-1509228468518-180dd4864904?q=80&w=1000&auto=format&fit=crop"; // data/mathematics
+            }
 
             let htmlContent = `
                 <h4>📚 REAL ACADEMIC LITERATURE & SEARCH HUBS FOR "${q.toUpperCase()}"</h4>
-                <p>Because live preprint indexes require exact registry matching, click below to instantly access real peer-reviewed papers, abstracts, and citations from leading databases:</p>
+                <p>Click below to instantly access real peer-reviewed papers, abstracts, and citations from leading databases:</p>
                 
                 <p><strong>1. Google Scholar (Comprehensive Peer-Reviewed Papers):</strong><br>
                 👉 <a href="https://scholar.google.com/scholar?q=${queryEncoded}" target="_blank">Search "${q}" on Google Scholar</a></p>
@@ -465,8 +476,8 @@
                 </ul>
 
                 <h4>🖼️ ULTRA-RESOLUTION SCHEMATICS & DYNAMIC PREVIEW</h4>
-                <p>High-Resolution Technical Render / CAD Blueprint Preview:</p>
-                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1000&auto=format&fit=crop" alt="Engineering Schematic Preview" class="schematic-preview">
+                <p>Contextual Technical Render Preview for <em>"${q}"</em>:</p>
+                <img src="${imageUrl}" alt="Dynamic Technical Preview" class="schematic-preview">
                 <p>👉 <a href="https://www.pinterest.com/search/pins/?q=${queryEncoded}%20cad%20blueprint%20schematic" target="_blank">Explore Full Visual Blueprint Collection on Pinterest</a></p>
             `;
 

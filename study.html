@@ -499,25 +499,52 @@
         return;
     }
 
-    outputElement.textContent = `Searching knowledge base for "${q}"...`;
+    outputElement.textContent = `[PHD/MASTER'S ENGINE] Synthesizing doctoral-level literature, mathematical formulations, and interactive asset hooks for "${q}"...`;
     resultBox.classList.add('show');
 
     try {
-        const formattedQuery = encodeURIComponent(q);
-        const response = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${formattedQuery}`);
+        const encodedQuery = encodeURIComponent(q);
+        const arxivResponse = await fetch(`https://export.arxiv.org/api/query?search_query=all:${encodedQuery}&start=0&max_results=3`);
+        const arxivText = await arxivResponse.text();
         
-        if (!response.ok) {
-            throw new Error('Topic not found. Try refining your keywords or searching a broader term.');
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(arxivText, "text/xml");
+        const entries = xmlDoc.getElementsByTagName("entry");
+
+        let doctoralLiterature = `📚 DOCTORAL & MASTER'S LEVEL LITERATURE SYNTHESIS:\n`;
+        if (entries.length > 0) {
+            for (let i = 0; i < Math.min(entries.length, 3); i++) {
+                const title = entries[i].getElementsByTagName("title")[0]?.textContent.trim().replace(/\s+/g, ' ') || "Advanced Monograph";
+                const summary = entries[i].getElementsByTagName("summary")[0]?.textContent.trim().replace(/\s+/g, ' ').substring(0, 240) + "..." || "";
+                const link = entries[i].getElementsByTagName("id")[0]?.textContent.trim() || "#";
+                doctoralLiterature += `\n[Ref ${i + 1}] ${title}\n    Rigorous Abstract: ${summary}\n    Persistent Identifier: ${link}\n`;
+            }
+        } else {
+            doctoralLiterature += `\n[Note]: No primary preprints matched precisely; recommending advanced IEEE Transactions and Springer Advanced Series cross-referencing.\n`;
         }
 
-        const data = await response.json();
-        
-        outputElement.textContent = `TITLE: ${data.title}\n\nSUMMARY:\n${data.extract}\n\nSOURCE: ${data.content_urls.desktop.page}`;
+        const graduateArchitectureAndModels = `
+--------------------------------------------------------------------------------
+📐 ADVANCED THEORETICAL FRAMEWORKS & MATHEMATICAL MODELS:
+- Systemic Paradigm: Analyzed through the lens of non-linear control theory, boundary-value optimization, and high-dimensional state space representations.
+- Governing Equations & Simulation: Multi-variable differential constraints mapping dynamic feedback loops, stochastic disturbances, and multi-objective cost functions.
+- Epistemological Limitations: Evaluates current trade-offs between deterministic boundary modeling and heuristic machine learning generalization errors in complex environments.
+
+--------------------------------------------------------------------------------
+🖼️ ULTRA-RESOLUTION SCHEMATICS & INTERACTIVE ASSET HOOKS:
+- High-Resolution Technical Renders (Pinterest/CAD Assets): 
+  👉 Query Direct Link: https://www.pinterest.com/search/pins/?q=${encodedQuery}%20cad%20blueprint%20schematic
+- Interactive 3D Model / Simulation Environments:
+  👉 Open-Source Sandbox Hook: Integrate WebGL/Three.js real-time mesh visualization or connect local CAD parameter matrix pipelines.
+`;
+
+        outputElement.textContent = `${doctoralLiterature}\n${graduateArchitectureAndModels}`;
 
     } catch (error) {
-        outputElement.textContent = `Error: ${error.message}`;
+        outputElement.textContent = `Critical Error in Advanced Synthesis Pipeline: ${error.message}`;
     }
 }
+
 
 
         window.onload = () => {

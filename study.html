@@ -540,7 +540,7 @@
             document.getElementById('scheduleResult').classList.add('show');
         }
 
-        async function runResearch() {
+       async function runResearch() {
     const q = document.getElementById('researchQuery').value.trim();
     const outputElement = document.getElementById('researchOutput');
     const resultBox = document.getElementById('researchResult');
@@ -551,7 +551,7 @@
     }
 
     resultBox.classList.add('show');
-    outputElement.innerHTML = `<p>Searching Semantic Scholar for "${q}"...</p>`;
+    outputElement.innerHTML = `<p>Looking up "${q}"...</p>`;
 
     const queryEncoded = encodeURIComponent(q);
 
@@ -561,43 +561,46 @@
         }[c]));
     const safeQ = escapeHtml(q);
 
-    let papersHtml;
+    let overviewHtml = '';
     try {
-        const apiUrl = `https://api.semanticscholar.org/graph/v1/paper/search?query=${queryEncoded}&limit=5&fields=title,abstract,year,authors,url,venue`;
-        const response = await fetch(apiUrl);
-        if (!response.ok) throw new Error(`API returned ${response.status}`);
-        const data = await response.json();
+        const searchUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${queryEncoded}&format=json&origin=*&srlimit=1`;
+        const searchRes = await fetch(searchUrl);
+        if (!searchRes.ok) throw new Error(`Search returned ${searchRes.status}`);
+        const searchData = await searchRes.json();
+        const bestTitle = searchData.query?.search?.[0]?.title;
 
-        if (data.data && data.data.length > 0) {
-            const cards = data.data.map((paper) => {
-                const title = escapeHtml(paper.title || 'Untitled');
-                const authors = (paper.authors || []).map((a) => a.name).join(', ') || 'Unknown authors';
-                const year = paper.year || 'n.d.';
-                const venue = paper.venue ? escapeHtml(paper.venue) : '';
-                const abstractRaw = paper.abstract || '';
-                const abstract = abstractRaw
-                    ? escapeHtml(abstractRaw.slice(0, 220)) + (abstractRaw.length > 220 ? '…' : '')
-                    : 'No abstract available.';
-                const link = paper.url || `https://www.semanticscholar.org/search?q=${queryEncoded}`;
-                return `
-                    <div class="paper-card">
-                        <p class="paper-title"><a href="${link}" target="_blank" rel="noopener">${title}</a></p>
-                        <p class="paper-meta">${escapeHtml(authors)} — ${year}${venue ? ' · ' + venue : ''}</p>
-                        <p class="paper-abstract">${abstract}</p>
-                    </div>`;
-            }).join('');
-            papersHtml = `<div class="paper-list">${cards}</div>`;
+        if (!bestTitle) {
+            overviewHtml = `<p class="paper-empty">No overview found for "${safeQ}". Try the search links below.</p>`;
         } else {
-            papersHtml = `<p class="paper-empty">No indexed papers found for "${safeQ}". Try the manual search links below.</p>`;
+            const summaryUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(bestTitle)}`;
+            const summaryRes = await fetch(summaryUrl);
+            if (!summaryRes.ok) throw new Error(`Summary returned ${summaryRes.status}`);
+            const page = await summaryRes.json();
+
+            const title = escapeHtml(page.title || bestTitle);
+            const extractRaw = page.extract || '';
+            const extract = extractRaw
+                ? escapeHtml(extractRaw.length > 400 ? extractRaw.slice(0, 400) + '…' : extractRaw)
+                : 'No summary available for this topic.';
+            const imageUrl = page.originalimage?.source || page.thumbnail?.source || '';
+            const pageUrl = page.content_urls?.desktop?.page || `https://en.wikipedia.org/wiki/${encodeURIComponent(bestTitle)}`;
+
+            overviewHtml = `
+                <div class="overview-card">
+                    ${imageUrl ? `<img class="overview-image" src="${imageUrl}" alt="${title}">` : ''}
+                    <h4>${title}</h4>
+                    <p class="overview-summary">${extract}</p>
+                    <a class="overview-source" href="${pageUrl}" target="_blank" rel="noopener">Read more on Wikipedia →</a>
+                </div>`;
         }
     } catch (err) {
-        console.error('Semantic Scholar fetch failed:', err);
-        papersHtml = `<p class="paper-error">Live search failed (${escapeHtml(err.message)}). Use the manual search links below.</p>`;
+        console.error('Wikipedia fetch failed:', err);
+        overviewHtml = `<p class="paper-error">Live lookup failed (${escapeHtml(err.message)}). Use the manual search links below.</p>`;
     }
 
     outputElement.innerHTML = `
-        <h4>📚 Papers matching "${safeQ}"</h4>
-        ${papersHtml}
+        <h4>📚 Overview: "${safeQ}"</h4>
+        ${overviewHtml}
 
         <h4 class="research-links-heading">🔎 Search directly on academic databases</h4>
         <div class="research-links">

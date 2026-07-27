@@ -9,6 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <!-- Cloudflare Turnstile for Bot Screening -->
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
   <div class="page-shell">
@@ -24,6 +26,14 @@
           <a href="#photos">Photos</a>
           <a href="#documents">Documents</a>
           <a href="#updates">Updates</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div class="auth-ui">
+          <button id="authBtn" class="button button-secondary" style="padding: 6px 12px; font-size: 0.875rem;">Sign In</button>
+          <div id="userInfo" class="user-info" style="display: none;">
+            <img id="userAvatar" src="" alt="Avatar" class="user-avatar">
+            <button id="signOutBtn" class="text-link" style="font-size: 0.875rem; border:none; background:none; cursor:pointer;">Sign Out</button>
+          </div>
         </div>
       </nav>
 
@@ -83,12 +93,17 @@
         <div class="gallery-grid" id="photoGallery"></div>
       </section>
 
-      <section class="section" id="documents">
+      <section class="section reveal" id="documents">
         <div class="section-heading">
           <p class="section-kicker">Archive</p>
           <h2>Documents</h2>
         </div>
-        <div class="document-grid" id="documentGrid"></div>
+        <div id="lockedState" class="panel locked-state">
+          <h3>🔒 Protected Section</h3>
+          <p>Please sign in with your Google or Email account to view and download my CV and certificates securely.</p>
+          <button id="authBtnInline" class="button button-primary">Verify Identity</button>
+        </div>
+        <div class="document-grid" id="documentGrid" style="display: none;"></div>
       </section>
 
       <section class="section" id="updates">
@@ -118,10 +133,43 @@
           </div>
         </div>
       </section>
+
+      <section class="section reveal" id="contact">
+        <div class="section-heading">
+          <p class="section-kicker">Get In Touch</p>
+          <h2>Contact Me</h2>
+        </div>
+        <div class="contact-layout">
+          <article class="panel">
+            <p>I am always open to discussing new projects, creative ideas or opportunities to be part of your visions.</p>
+            <br>
+            <form id="contactForm" class="contact-form">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required placeholder="Your Name">
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required placeholder="your@email.com">
+              </div>
+              <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required rows="4" placeholder="How can I help you?"></textarea>
+              </div>
+              <!-- Cloudflare Turnstile Widget -->
+              <div class="cf-turnstile" data-sitekey="0x4AAAAAADCrrSRFfKochWxJ" data-theme="light"></div>
+              
+              <button type="submit" class="button button-primary" style="margin-top: 1rem;">Send Message</button>
+              <p id="formStatus" class="form-status"></p>
+            </form>
+          </article>
+        </div>
+      </section>
     </main>
   </div>
 
   <script src="content.js"></script>
   <script src="script.js"></script>
+  <script type="module" src="firebase-auth.js"></script>
 </body>
 </html>

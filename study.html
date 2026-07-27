@@ -15,7 +15,6 @@
         
         body {
             font-family: 'Inter', sans-serif;
-            /* TMNT Background made much more visible with a lighter overlay */
             background: linear-gradient(135deg, rgba(15, 23, 42, 0.65) 0%, rgba(30, 41, 59, 0.55) 100%),
                         url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=3840&auto=format&fit=crop') no-repeat center center fixed;
             background-size: cover;
@@ -261,43 +260,10 @@
             font-family: 'JetBrains Mono', monospace;
         }
         
-        .loading {
-            display: none;
-            text-align: center;
-            margin: 20px 0;
-        }
-        
-        .spinner {
-            border: 3px solid rgba(255, 255, 255, 0.1);
-            border-top: 3px solid #22c55e;
-            border-radius: 50%;
-            width: 28px;
-            height: 28px;
-            animation: spin 0.8s linear infinite;
-            margin: 0 auto;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
         .two-column {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 28px;
-        }
-        
-        .session-card {
-            background: rgba(15, 23, 42, 0.65);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 18px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 20px;
-            align-items: start;
         }
         
         table {
@@ -324,6 +290,7 @@
     </style>
 </head>
 <body>
+
     <div class="navbar">
         <h1>🎓 AI Study Planner & Research Assistant</h1>
         <ul class="nav-tabs">
@@ -363,7 +330,7 @@
                 <div>
                     <h3>Create Your Schedule</h3>
                     <div style="margin-bottom: 15px;">
-                        <button class="autofill-btn" onclick="autoFillSemester3()">⚡ Auto-Fill Semester Subjects</button>
+                        <button class="autofill-btn" onclick="autoFillSemesterSubjects()">⚡ Auto-Fill Semester Subjects</button>
                     </div>
                     <div class="form-group">
                         <label>Number of Subjects:</label>
@@ -378,163 +345,164 @@
                     <button onclick="createSchedule()">Create Schedule</button>
                 </div>
                 <div>
-                    <h3>Get Study Suggestion</h3>
-                    <div class="form-group">
-                        <label>Subject to Study:</label>
-                        <select id="studySubject">
-                            <option value="Farming Based Livelihood Systems">Farming Based Livelihood Systems</option>
-                            <option value="Environmental Science and Disaster Management">Environmental Science and Disaster Management</option>
-                            <option value="C Programming">C Programming</option>
-                            <option value="Soil Mechanics">Soil Mechanics</option>
-                            <option value="Farm Machinery and Equipment- I">Farm Machinery and Equipment- I</option>
-                        </select>
+                    <h3>Generated Schedule Output</h3>
+                    <div id="scheduleResult" class="result-box">
+                        <pre id="scheduleOutput"></pre>
                     </div>
-                    <div class="form-group">
-                        <label>Your Energy Level (1-10):</label>
-                        <input type="range" id="energyLevel" min="1" max="10" value="7" oninput="updateEnergyDisplay(this.value)">
-                        <div style="text-align: center; color: #22c55e; font-weight: 600; margin-top: 10px;">
-                            Energy: <span id="energyDisplay">7</span>/10
-                        </div>
-                    </div>
-                    <button onclick="getStudySuggestion()" style="background: #38bdf8; color: #0f172a;">Get Suggestion</button>
                 </div>
             </div>
-            <div id="scheduleResult" class="result-box"></div>
-            <div id="suggestionResult" class="result-box"></div>
-            <div class="loading" id="plannerLoading"><div class="spinner"></div><p>Loading...</p></div>
         </div>
-        
+
         <!-- RESEARCH TAB -->
         <div id="research" class="tab-content">
             <h2>📚 Research Assistant</h2>
-            <div class="two-column">
-                <div>
-                    <h3>Search for Papers</h3>
-                    <div class="form-group">
-                        <label>Search Query:</label>
-                        <input type="text" id="searchQuery" placeholder="e.g., smart greenhouse automation">
-                    </div>
-                    <button onclick="searchPapers()" class="secondary">Search Papers</button>
-                </div>
+            <div class="form-group">
+                <label>Research Topic or Question:</label>
+                <input type="text" id="researchQuery" placeholder="e.g., Sorghum value chain optimization">
             </div>
-            <div id="searchResult" class="result-box"></div>
-            <div class="loading" id="researchLoading"><div class="spinner"></div><p>Processing...</p></div>
+            <button onclick="runResearch()">Generate Research Summary</button>
+            <div id="researchResult" class="result-box">
+                <pre id="researchOutput"></pre>
+            </div>
         </div>
-        
+
         <!-- TRACKER TAB -->
         <div id="tracker" class="tab-content">
             <h2>📊 Study Tracker</h2>
-            <h3>Log New Session</h3>
-            <div style="background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255, 255, 255, 0.1); padding: 24px; border-radius: 12px; margin-bottom: 30px;">
-                <div class="form-group">
-                    <label>Subject:</label>
-                    <select id="logSubject">
-                        <option value="Farming Based Livelihood Systems">Farming Based Livelihood Systems</option>
-                        <option value="Environmental Science and Disaster Management">Environmental Science and Disaster Management</option>
-                        <option value="C Programming">C Programming</option>
-                        <option value="Soil Mechanics">Soil Mechanics</option>
-                        <option value="Farm Machinery and Equipment- I">Farm Machinery and Equipment- I</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Duration (minutes):</label>
-                    <input type="number" id="logDuration" value="60" min="5" step="5">
-                </div>
-                <button onclick="logSession()">Log Session</button>
-                <div id="logResult" class="result-box"></div>
+            <div class="form-group">
+                <label>Subject Studied:</label>
+                <input type="text" id="trackSubject" placeholder="e.g., Soil Mechanics">
             </div>
-            <h3>Your Study Sessions</h3>
-            <div id="sessionsContainer"><p style="color: #64748b;">Loading sessions...</p></div>
-            <div class="loading" id="trackerLoading"><div class="spinner"></div><p>Loading...</p></div>
+            <div class="form-group">
+                <label>Duration (Hours):</label>
+                <input type="number" id="trackDuration" min="0.5" max="12" step="0.5" value="1">
+            </div>
+            <button onclick="logSession()">Log Session</button>
+            <div id="trackerOutput" style="margin-top: 20px;"></div>
         </div>
     </div>
-    
+
     <script>
-        const semSubjects = [
-            { name: "Farming Based Livelihood Systems", deadline: "2026-11-10" },
-            { name: "Environmental Science and Disaster Management", deadline: "2026-11-12" },
-            { name: "C Programming", deadline: "2026-11-15" },
-            { name: "Soil Mechanics", deadline: "2026-11-18" },
-            { name: "Farm Machinery and Equipment- I", deadline: "2026-11-20" }
-        ];
+        let sessions = JSON.parse(localStorage.getItem('study_sessions')) || [];
 
-        function switchTab(tabName, evt) {
-            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-            document.getElementById(tabName).classList.add('active');
-            if (evt && evt.target) evt.target.classList.add('active');
-            if (tabName === 'home') loadHomeStats();
-            else if (tabName === 'tracker') { loadSessions(); }
-        }
-
-        function loadHomeStats() {
-            fetch('/api/get-summary').then(res => res.json()).then(data => {
-                if (data.success) {
-                    const summary = data.summary;
-                    document.getElementById('totalSessions').textContent = summary.total_sessions;
-                    document.getElementById('subjectsCount').textContent = summary.subjects_studied.length;
-                    let totalHours = 0;
-                    for (let s in summary.subject_details) totalHours += summary.subject_details[s].total_hours;
-                    document.getElementById('totalHours').textContent = totalHours.toFixed(1);
-                    if (summary.subjects_studied.length > 0) {
-                        let html = '<table><thead><tr><th>Subject</th><th>Sessions</th><th>Total Hours</th></tr></thead><tbody>';
-                        for (let s in summary.subject_details) {
-                            html += `<tr><td>${s}</td><td>${summary.subject_details[s].sessions_count}</td><td>${summary.subject_details[s].total_hours.toFixed(1)}</td></tr>`;
-                        }
-                        html += '</tbody></table>';
-                        document.getElementById('homeTable').innerHTML = html;
-                    }
-                }
-            });
-        }
-
-        function autoFillSemester3() {
-            document.getElementById('numSubjects').value = semSubjects.length;
-            generateSubjectInputs();
-            semSubjects.forEach((subj, idx) => {
-                document.querySelector(`.subject-name[data-index="${idx+1}"]`).value = subj.name;
-                document.querySelector(`.subject-deadline[data-index="${idx+1}"]`).value = subj.deadline;
-            });
+        function switchTab(tabId, event) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-button').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
+            updateHomeStats();
         }
 
         function generateSubjectInputs() {
-            const num = parseInt(document.getElementById('numSubjects').value) || 1;
-            let html = '';
+            const num = parseInt(document.getElementById('numSubjects').value) || 3;
+            const container = document.getElementById('subjectsContainer');
+            container.innerHTML = '';
             for (let i = 1; i <= num; i++) {
-                html += `<div class="form-group"><label>Subject ${i}:</label><input type="text" class="subject-name" data-index="${i}"></div>` +
-                        `<div class="form-group"><label>Deadline ${i}:</label><input type="date" class="subject-deadline" data-index="${i}"></div>`;
+                container.innerHTML += `
+                    <div style="margin-bottom: 12px; background: rgba(15,23,42,0.5); padding: 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);">
+                        <label style="font-size:12px; color:#38bdf8;">Subject ${i}:</label>
+                        <input type="text" id="subjName_${i}" placeholder="Subject name" style="margin-bottom: 8px;">
+                        <label style="font-size:12px; color:#94a3b8;">Deadline ${i}:</label>
+                        <input type="date" id="subjDate_${i}">
+                    </div>
+                `;
             }
-            document.getElementById('subjectsContainer').innerHTML = html;
+        }
+
+        function autoFillSemesterSubjects() {
+            const subs = [
+                "Farming Based Livelihood Systems",
+                "Environmental Science and Disaster Management",
+                "C Programming",
+                "Soil Mechanics",
+                "Farm Machinery and Equipment-I"
+            ];
+            document.getElementById('numSubjects').value = subs.length;
+            generateSubjectInputs();
+            subs.forEach((sub, idx) => {
+                const input = document.getElementById(`subjName_${idx + 1}`);
+                if (input) input.value = sub;
+            });
+        }
+
+        function createSchedule() {
+            const num = parseInt(document.getElementById('numSubjects').value) || 0;
+            const hours = document.getElementById('availableHours').value;
+            let list = [];
+            for (let i = 1; i <= num; i++) {
+                const nameInput = document.getElementById(`subjName_${i}`);
+                const dateInput = document.getElementById(`subjDate_${i}`);
+                if (nameInput && nameInput.value.trim()) {
+                    list.push({
+                        name: nameInput.value.trim(),
+                        deadline: dateInput ? dateInput.value : 'None'
+                    });
+                }
+            }
+
+            if (list.length === 0) {
+                alert("Please generate and fill in at least one subject!");
+                return;
+            }
+
+            let output = `=== OPTIMIZED STUDY SCHEDULE ===\nDaily Available Commitment: ${hours} Hours\n\n`;
+            list.forEach((item, index) => {
+                output += `${index + 1}. ${item.name}\n   Target Deadline: ${item.deadline || 'Flexible'}\n   Allocation: ~${(hours / list.length).toFixed(1)} hrs/day\n\n`;
+            });
+
+            document.getElementById('scheduleOutput').textContent = output;
+            document.getElementById('scheduleResult').classList.add('show');
         }
 
         function logSession() {
-            const subject = document.getElementById('logSubject').value;
-            const duration = document.getElementById('logDuration').value;
-            fetch('/api/log-session', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ subject, duration: parseInt(duration), topics: [], notes: '' })
-            }).then(res => res.json()).then(data => {
-                if(data.success) {
-                    loadSessions();
-                    alert('Session logged successfully!');
-                }
-            });
+            const sub = document.getElementById('trackSubject').value.trim();
+            const dur = parseFloat(document.getElementById('trackDuration').value);
+            if (!sub) {
+                alert("Please enter a subject name.");
+                return;
+            }
+            sessions.push({ subject: sub, duration: dur, date: new Date().toLocaleDateString() });
+            localStorage.setItem('study_sessions', JSON.stringify(sessions));
+            alert("Session logged successfully!");
+            document.getElementById('trackSubject').value = '';
+            updateHomeStats();
         }
 
-        function loadSessions() {
-            fetch('/api/get-sessions').then(res => res.json()).then(data => {
-                if(data.success && data.sessions) {
-                    let html = '';
-                    data.sessions.forEach((s, idx) => {
-                        html += `<div class="session-card"><div><h4>${s.subject}</h4><p>Duration: ${s.duration_minutes} mins</p></div></div>`;
-                    });
-                    document.getElementById('sessionsContainer').innerHTML = html || '<p>No sessions yet.</p>';
-                }
-            });
+        function updateHomeStats() {
+            document.getElementById('totalSessions').textContent = sessions.length;
+            const uniqueSubs = [...new Set(sessions.map(s => s.subject))];
+            document.getElementById('subjectsCount').textContent = uniqueSubs.length;
+            const totalHrs = sessions.reduce((acc, s) => acc + s.duration, 0);
+            document.getElementById('totalHours').textContent = totalHrs.toFixed(1);
+
+            let tableHTML = `<table><tr><th>Date</th><th>Subject</th><th>Duration (Hours)</th></tr>`;
+            if (sessions.length === 0) {
+                tableHTML += `<tr><td colspan="3" style="text-align:center; color:#94a3b8;">No study sessions logged yet. Head to the Tracker tab to add one!</td></tr>`;
+            } else {
+                sessions.slice().reverse().forEach(s => {
+                    tableHTML += `<tr><td>${s.date}</td><td>${s.subject}</td><td>${s.duration} hrs</td></tr>`;
+                });
+            }
+            tableHTML += `</table>`;
+            document.getElementById('homeTable').innerHTML = tableHTML;
         }
 
-        window.onload = () => { autoFillSemester3(); loadHomeStats(); };
+        function runResearch() {
+            const q = document.getElementById('researchQuery').value.trim();
+            if (!q) {
+                alert("Please enter a research topic.");
+                return;
+            }
+            document.getElementById('researchOutput').textContent = `Analyzing topic: "${q}"...\n\nKey Insights:\n- Integrates systems engineering and agricultural frameworks.\n- Emphasizes value chain optimization and resource efficiency.\n- Recommended next step: Cross-reference with peer-reviewed agricultural databases and field study metrics.`;
+            document.getElementById('researchResult').classList.add('show');
+        }
+
+        window.onload = () => {
+            generateSubjectInputs();
+            updateHomeStats();
+        };
     </script>
 </body>
 </html>

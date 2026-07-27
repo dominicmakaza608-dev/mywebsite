@@ -1,55 +1,52 @@
 window.siteContent = {
   profile: {
-    name: "DOMINIC MAKAZA",
+    name: "Jarvis SU",
     role: "Consultant, Learner, Builder",
-    summary: "This website works as a living CV. Use it to present your background, highlight new work, upload documents, and keep a daily record of progress.",
-    about: "Write a short introduction here. You can describe your background, values, career goals, and the kind of work you want people to know you for. Because this site is content-driven, you can keep refreshing it as your experience grows.",
+    summary: "This website showcases my background, projects, research, documents, and daily progress in agriculture and technology.",
+    about: "I'm a learner focused on irrigation and pest detection research. I believe in building sustainable solutions through technology and community engagement.",
     image: "assets/photos/artemis-ii-liftoff.jpg",
     facts: [
-      { label: "Base", value: "Your City" },
-      { label: "Focus", value: "Your Expertise" },
+      { label: "Base", value: "Harare" },
+      { label: "Focus", value: "Learning to Learn" },
       { label: "Open To", value: "Work, Study, Projects" }
     ],
     stats: [
-      { label: "Years of Experience", value: "03+" },
+      { label: "Years of Experience", value: "03" },
       { label: "Projects", value: "12" },
       { label: "Certificates", value: "05" }
     ],
     socials: [
       {
         label: "LinkedIn",
-        handle: "linkedin.com/in/dominic-makaza",
-        href: "https://www.linkedin.com/in/dominic-makaza/"
+        handle: "linkedin.com/in/jarvis-su",
+        href: "https://www.linkedin.com/in/jarvis-su/"
       },
       {
         label: "X",
-        handle: "@dominicmakaza",
-        href: "https://x.com/dominicmakaza"
+        handle: "@makaz425",
+        href: "https://x.com/makaz425"
       }
     ],
     contacts: [
-      { label: "Email", value: "you@example.com", href: "mailto:you@example.com" },
-      { label: "Phone", value: "+91 00000 00000", href: "tel:+910000000000" },
-      { label: "LinkedIn", value: "linkedin.com/in/dominic-makaza", href: "https://www.linkedin.com/in/dominic-makaza/" },
-      { label: "X", value: "x.com/dominicmakaza", href: "https://x.com/dominicmakaza" },
-      { label: "Location", value: "India" }
+      { label: "Email", value: "jarvis@example.com", href: "mailto:jarvis@example.com" },
+      { label: "Location", value: "Harare, Zimbabwe" }
     ]
   },
   timeline: [
     {
       period: "2026",
-      title: "Started this living CV website",
-      description: "Created a personal website that can be updated daily with photos, documents, and short activity notes."
+      title: "Building digital solutions",
+      description: "Focused on irrigation technology and human rights advocacy through digital platforms."
     },
     {
       period: "2025",
-      title: "Add your most important recent milestone",
-      description: "Replace this with your job, degree, internship, certification, or major project."
+      title: "Undergrad - B.Tech Agriculture Engineering",
+      description: "Completed undergraduate studies in Agricultural Engineering with focus on sustainable irrigation systems."
     },
     {
       period: "Earlier",
-      title: "Add your earlier journey",
-      description: "Use the timeline to show how your work and learning have grown over time."
+      title: "Early journey in tech and agriculture",
+      description: "Started exploring the intersection of technology and sustainable farming solutions."
     }
   ],
   photos: [
@@ -68,20 +65,14 @@ window.siteContent = {
   ],
   documents: [
     {
-      type: "CV",
-      title: "Resume PDF",
-      description: "Replace this sample document with your real CV or resume PDF.",
-      file: "assets/documents/sample-cv.txt"
-    },
-    {
-      type: "Certificate",
-      title: "Supporting Document",
-      description: "Use this section for certificates, transcripts, portfolios, or recommendation letters.",
-      file: "assets/documents/sample-document.txt"
+      type: "Research",
+      title: "Pest Detection",
+      description: "Research and documentation on pest detection methods in agricultural systems.",
+      file: "assets/documents/pest-detection.pdf"
     }
   ],
   journal: {
-    intro: "Use this feed like a daily logbook. Each entry can hold one short reflection, a few highlights, and links to the photos or documents you added that day.",
+    intro: "irrigation + human rights",
     prompts: [
       "What did I finish today?",
       "What did I learn or improve?",
@@ -111,22 +102,21 @@ window.siteContent = {
       tag: "Website Setup",
       tags: ["Design", "Setup", "Launch Prep"],
       mood: "Fresh Start",
-      title: "Prepared the first version of my personal CV site",
-      lead: "Built the base layout for a personal site that feels like both a CV and a running journal.",
+      title: "Prepared the first version of my personal website",
+      lead: "Built the base layout for a personal site that feels like both a portfolio and a running journal.",
       body: "Set up a homepage with sections for biography, timeline, documents, photos, and daily updates. The feed is designed so each day can become a small record of progress instead of just a static resume line.",
       image: "assets/photos/project-placeholder.svg",
       highlights: ["Homepage structure ready", "Content file created", "Documents and photos supported"],
       attachments: [
-        { label: "CV Placeholder", href: "assets/documents/sample-cv.txt" },
-        { label: "Project Snapshot", href: "assets/photos/project-placeholder.svg" }
+        { label: "Website Setup Details", href: "assets/documents/pest-detection.pdf" }
       ]
     },
     {
       date: "2026-04-14",
       tag: "Documents",
-      tags: ["CV", "Certificates", "Files"],
+      tags: ["Documents", "Research", "Files"],
       mood: "Organized",
-      title: "Added room for CV and certificates",
+      title: "Added room for documents and research",
       lead: "Created a simple pattern for attaching files so the website can grow as your record grows.",
       body: "This area can be updated any day by changing file names in content.js and placing the files inside assets/documents. That makes it easy to keep replacing old versions with newer certificates, resumes, and supporting files.",
       highlights: ["Reusable document section", "Simple file links", "Ready for PDF uploads"],
@@ -155,7 +145,7 @@ window.siteContent = {
       mood: "Thoughtful",
       title: "Mapped out how the site should grow over time",
       lead: "Sketched out a rhythm for writing small updates so the website stays active and useful.",
-      body: "Planned to use the site as a running CV, a simple archive, and a personal progress feed. That means each entry can capture one useful thing from the day, even if it is small.",
+      body: "Planned to use the site as a portfolio, a research archive, and a personal progress feed. That means each entry can capture one useful thing from the day, even if it is small.",
       highlights: ["Defined the site purpose", "Made daily updates easier", "Prepared for long-term use"],
       attachments: [
         { label: "Sample CV", href: "assets/documents/sample-cv.txt" }

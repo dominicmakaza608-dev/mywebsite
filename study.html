@@ -489,15 +489,36 @@
             document.getElementById('homeTable').innerHTML = tableHTML;
         }
 
-        function runResearch() {
-            const q = document.getElementById('researchQuery').value.trim();
-            if (!q) {
-                alert("Please enter a research topic.");
-                return;
-            }
-            document.getElementById('researchOutput').textContent = `Analyzing topic: "${q}"...\n\nKey Insights:\n- Integrates systems engineering and agricultural frameworks.\n- Emphasizes value chain optimization and resource efficiency.\n- Recommended next step: Cross-reference with peer-reviewed agricultural databases and field study metrics.`;
-            document.getElementById('researchResult').classList.add('show');
+        async function runResearch() {
+    const q = document.getElementById('researchQuery').value.trim();
+    const outputElement = document.getElementById('researchOutput');
+    const resultBox = document.getElementById('researchResult');
+
+    if (!q) {
+        alert("Please enter a research topic.");
+        return;
+    }
+
+    outputElement.textContent = `Searching knowledge base for "${q}"...`;
+    resultBox.classList.add('show');
+
+    try {
+        const formattedQuery = encodeURIComponent(q);
+        const response = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${formattedQuery}`);
+        
+        if (!response.ok) {
+            throw new Error('Topic not found. Try refining your keywords or searching a broader term.');
         }
+
+        const data = await response.json();
+        
+        outputElement.textContent = `TITLE: ${data.title}\n\nSUMMARY:\n${data.extract}\n\nSOURCE: ${data.content_urls.desktop.page}`;
+
+    } catch (error) {
+        outputElement.textContent = `Error: ${error.message}`;
+    }
+}
+
 
         window.onload = () => {
             generateSubjectInputs();

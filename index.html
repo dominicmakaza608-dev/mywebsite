@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Personal Website</title>
-  <meta name="description" content="A personal website for sharing a profile, achievements, daily updates, photos, and documents.">
+  <title>Deep Space & Agricultural Systems | Mission Portal</title>
+  <meta name="description" content="Official personal portal and research hub exploring advanced agricultural engineering, multi-planetary life systems, and technical documentation.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -17,16 +17,17 @@
     <header class="hero">
       <nav class="topbar">
         <div class="brand">
-          <span class="brand-mark">✓</span>
-          <span id="brandName">Your Name</span>
+          <span class="brand-mark">⚡</span>
+          <span id="brandName">Mission Control</span>
         </div>
         <div class="nav-links">
           <a href="#about">About</a>
           <a href="#timeline">Timeline</a>
-          <a href="#photos">Photos</a>
-          <a href="#documents">Documents</a>
-          <a href="#updates">Updates</a>
+          <a href="#photos">Gallery</a>
+          <a href="#documents">Archive</a>
+          <a href="#updates">Telemetry</a>
           <a href="#contact">Contact</a>
+          <a href="/study.html" class="nav-study-link">Study Terminal</a>
         </div>
         <div class="auth-ui">
           <button id="authBtn" class="button button-secondary" style="padding: 6px 12px; font-size: 0.875rem;">Sign In</button>
@@ -36,24 +37,19 @@
           </div>
         </div>
       </nav>
-
       <section class="hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow">Personal Website</p>
-          <h1 id="heroName">Your Name</h1>
-          <p class="hero-role" id="heroRole">Your role or headline</p>
+          <p class="eyebrow">Advanced Aerospace & Agricultural Systems</p>
+          <h1 id="heroName">Dominic Makaza</h1>
+          <p class="hero-role" id="heroRole">Agricultural Engineering & Space Exploration Researcher</p>
           <p class="hero-summary" id="heroSummary"></p>
-
           <div class="hero-actions">
-            <a class="button button-primary" id="primaryDocumentLink" href="#documents">View Documents</a>
-            <a class="button button-secondary" href="#updates">Latest Updates</a>
+            <a class="button button-primary" id="primaryDocumentLink" href="#documents">Access Archives</a>
+            <a class="button button-secondary" href="#updates">Mission Updates</a>
           </div>
-
           <div class="social-strip" id="socialLinks"></div>
-
           <div class="quick-facts" id="quickFacts"></div>
         </div>
-
         <aside class="hero-card">
           <div class="portrait-frame">
             <img id="profileImage" alt="Profile portrait">
@@ -62,12 +58,11 @@
         </aside>
       </section>
     </header>
-
     <main>
       <section class="section section-about" id="about">
         <div class="section-heading">
-          <p class="section-kicker">About</p>
-          <h2>Who I am</h2>
+          <p class="section-kicker">Orientation</p>
+          <h2>System Profile</h2>
         </div>
         <div class="about-layout">
           <article class="panel panel-large">
@@ -76,53 +71,49 @@
           <div class="stats-grid" id="statsGrid"></div>
         </div>
       </section>
-
       <section class="section" id="timeline">
         <div class="section-heading">
-          <p class="section-kicker">Journey</p>
-          <h2>Timeline</h2>
+          <p class="section-kicker">Trajectory</p>
+          <h2>Mission Timeline</h2>
         </div>
         <div class="timeline-list" id="timelineList"></div>
       </section>
-
       <section class="section" id="photos">
         <div class="section-heading">
-          <p class="section-kicker">Gallery</p>
-          <h2>Photos</h2>
+          <p class="section-kicker">Visual Log</p>
+          <h2>Gallery</h2>
         </div>
         <div class="gallery-grid" id="photoGallery"></div>
       </section>
-
       <section class="section reveal" id="documents">
         <div class="section-heading">
-          <p class="section-kicker">Archive</p>
-          <h2>Documents</h2>
+          <p class="section-kicker">Data Archive</p>
+          <h2>Secure Documents</h2>
         </div>
         <div id="lockedState" class="panel locked-state">
-          <h3>🔒 Protected Section</h3>
-          <p>Please sign in with your Google or Email account to view and download my CV and certificates securely.</p>
-          <button id="authBtnInline" class="button button-primary">Verify Identity</button>
+          <h3>🔒 Restricted Clearance</h3>
+          <p>Please authenticate with your credentials to inspect restricted mission papers, CVs, and technical certificates.</p>
+          <button id="authBtnInline" class="button button-primary">Authenticate Identity</button>
         </div>
         <div class="document-grid" id="documentGrid" style="display: none;"></div>
       </section>
-
       <section class="section" id="updates">
         <div class="section-heading">
-          <p class="section-kicker">Daily Journal</p>
-          <h2>Journal Feed</h2>
+          <p class="section-kicker">Telemetry</p>
+          <h2>Activity Log</h2>
         </div>
         <div class="journal-layout">
           <aside class="journal-sidebar panel">
-            <p class="section-kicker">Posting Rhythm</p>
-            <h3 class="journal-title">One place for each day</h3>
+            <p class="section-kicker">Cadence</p>
+            <h3 class="journal-title">Continuous Logging</h3>
             <p class="journal-copy" id="journalIntro"></p>
             <div class="journal-prompt-list" id="journalPromptList"></div>
             <div class="journal-sidebar-group">
-              <p class="journal-filter-label">Browse By Tag</p>
+              <p class="journal-filter-label">Filter By Tag</p>
               <div class="filter-chip-list" id="journalTags"></div>
             </div>
             <div class="journal-sidebar-group">
-              <p class="journal-filter-label">Browse By Month</p>
+              <p class="journal-filter-label">Filter By Cycle</p>
               <div class="filter-chip-list" id="journalArchives"></div>
             </div>
           </aside>
@@ -133,33 +124,31 @@
           </div>
         </div>
       </section>
-
       <section class="section reveal" id="contact">
         <div class="section-heading">
-          <p class="section-kicker">Get In Touch</p>
-          <h2>Contact Me</h2>
+          <p class="section-kicker">Comms Channel</p>
+          <h2>Establish Link</h2>
         </div>
         <div class="contact-layout">
           <article class="panel">
-            <p>I am always open to discussing new projects, creative ideas or opportunities to be part of your visions.</p>
+            <p>Direct communication channels are open for collaboration, research queries, and mission discussions.</p>
             <br>
             <form id="contactForm" class="contact-form">
               <div class="form-group">
-                <label for="name">Name</label>
+                <label for="name">Designation / Name</label>
                 <input type="text" id="name" name="name" required placeholder="Your Name">
               </div>
               <div class="form-group">
-                <label for="email">Email</label>
+                <label for="email">Comms Address (Email)</label>
                 <input type="email" id="email" name="email" required placeholder="your@email.com">
               </div>
               <div class="form-group">
-                <label for="message">Message</label>
-                <textarea id="message" name="message" required rows="4" placeholder="How can I help you?"></textarea>
+                <label for="message">Transmission Message</label>
+                <textarea id="message" name="message" required rows="4" placeholder="Enter your message..."></textarea>
               </div>
               <!-- Cloudflare Turnstile Widget -->
               <div class="cf-turnstile" data-sitekey="0x4AAAAAADCrrSRFfKochWxJ" data-theme="light"></div>
-              
-              <button type="submit" class="button button-primary" style="margin-top: 1rem;">Send Message</button>
+              <button type="submit" class="button button-primary" style="margin-top: 1rem;">Transmit Message</button>
               <p id="formStatus" class="form-status"></p>
             </form>
           </article>
@@ -167,7 +156,6 @@
       </section>
     </main>
   </div>
-
   <script src="content.js"></script>
   <script src="script.js"></script>
   <script type="module" src="firebase-auth.js"></script>
